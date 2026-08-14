@@ -5,49 +5,90 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// Note that some adapters may set a maximum length for the String type by default, please ensure your strings are long
-// enough when changing adapters.
-// See https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string for more information
 datasource db {
   provider = "sqlite"
   url      = "file:dev.sqlite"
 }
 
 model Session {
-  id            String    @id
-  shop          String
-  state         String
-  isOnline      Boolean   @default(false)
-  scope         String?
-  expires       DateTime?
-  accessToken   String
-  userId        BigInt?
-  firstName     String?
-  lastName      String?
-  email         String?
-  accountOwner  Boolean   @default(false)
-  locale        String?
-  collaborator  Boolean?  @default(false)
-  emailVerified Boolean?  @default(false)
+  id                  String    @id
+  shop                String
+  state               String
+  isOnline            Boolean   @default(false)
+  scope               String?
+  expires             DateTime?
+  accessToken         String
+  userId              BigInt?
+  firstName           String?
+  lastName            String?
+  email               String?
+  accountOwner        Boolean   @default(false)
+  locale              String?
+  collaborator        Boolean?  @default(false)
+  emailVerified       Boolean?  @default(false)
   refreshToken        String?
   refreshTokenExpires DateTime?
 }
 
 model SmsSetting {
-  shop      String   @id
-  enabled   Boolean  @default(false)
-  senderId  String   @default("")
+  shop                 String   @id
+  enabled              Boolean  @default(false)
+  storeName            String   @default("")
+  provider             String   @default("twilio")
+  encryptedCredentials String   @default("")
+  fromNumber           String   @default("")
+  senderId             String   @default("")
+  countryCode          String   @default("IN")
+  timezone             String   @default("Asia/Kolkata")
+  quietHoursEnabled    Boolean  @default(false)
+  quietHoursStart      String   @default("21:00")
+  quietHoursEnd        String   @default("08:00")
+  addOrderNote         Boolean  @default(true)
+  includeOptOutText    Boolean  @default(true)
+  testSent             Boolean  @default(false)
+  plan                 String   @default("free")
+  smsUsedThisPeriod    Int      @default(0)
+  periodStart          DateTime @default(now())
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model SmsTemplate {
+  id        String   @id @default(cuid())
+  shop      String
+  eventType String
+  enabled   Boolean  @default(true)
+  body      String
   updatedAt DateTime @updatedAt
+
+  @@unique([shop, eventType])
 }
 
 model SmsLog {
-  id        String   @id @default(cuid())
+  id         String   @id @default(cuid())
+  shop       String
+  eventType  String   @default("order_confirmed")
+  orderId    String?
+  orderName  String?
+  to         String
+  body       String
+  status     String   @default("pending")
+  provider   String?
+  providerId String?
+  error      String?
+  dedupeKey  String
+  sendAt     DateTime?
+  createdAt  DateTime @default(now())
+
+  @@unique([shop, dedupeKey])
+  @@index([shop, createdAt])
+  @@index([shop, status])
+}
+
+model SmsOptOut {
   shop      String
-  orderId   String?
-  to        String
-  body      String
-  status    String   @default("pending")
+  phone     String
   createdAt DateTime @default(now())
 
-  @@index([shop, createdAt])
+  @@id([shop, phone])
 }

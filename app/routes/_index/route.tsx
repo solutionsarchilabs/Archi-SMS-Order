@@ -21,16 +21,17 @@ export default function App() {
   return (
     <div className={styles.index}>
       <div className={styles.content}>
-        <h1 className={styles.heading}>A short heading about [your app]</h1>
+        <h1 className={styles.heading}>Order SMS that cuts WISMO and recovers COD</h1>
         <p className={styles.text}>
-          A tagline about [your app] that describes your value proposition.
+          Archi SMS Order texts customers when they buy, when cash-on-delivery is due, and when the
+          package ships or arrives — automatically from Shopify.
         </p>
         {showForm && (
           <Form className={styles.form} method="post" action="/auth/login">
             <label className={styles.label}>
               <span>Shop domain</span>
               <input className={styles.input} type="text" name="shop" />
-              <span>e.g: my-shop-domain.myshopify.com</span>
+              <span>e.g. my-store.myshopify.com</span>
             </label>
             <button className={styles.button} type="submit">
               Log in
@@ -39,16 +40,16 @@ export default function App() {
         )}
         <ul className={styles.list}>
           <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+            <strong>Fewer support tickets.</strong> Shipping and delivery texts answer “where is my
+            order?” before the customer opens chat.
           </li>
           <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+            <strong>Better COD completion.</strong> Confirm the amount and keep customers ready for
+            the courier.
           </li>
           <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+            <strong>Your SMS provider.</strong> Connect Twilio, MSG91, or any HTTP gateway. No
+            locked-in message markup.
           </li>
         </ul>
       </div>

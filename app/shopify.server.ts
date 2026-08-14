@@ -2,10 +2,13 @@ import "@shopify/shopify-app-react-router/adapters/node";
 import {
   ApiVersion,
   AppDistribution,
+  BillingInterval,
   shopifyApp,
 } from "@shopify/shopify-app-react-router/server";
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma";
 import prisma from "./db.server";
+import { GROWTH_PLAN, PRO_PLAN, STARTER_PLAN } from "./lib/constants";
+import { ensureShopSetup } from "./lib/shop.server";
 
 const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
@@ -16,6 +19,31 @@ const shopify = shopifyApp({
   authPathPrefix: "/auth",
   sessionStorage: new PrismaSessionStorage(prisma),
   distribution: AppDistribution.AppStore,
+  billing: {
+    [STARTER_PLAN]: {
+      trialDays: 14,
+      lineItems: [
+        { amount: 9, currencyCode: "USD", interval: BillingInterval.Every30Days },
+      ],
+    },
+    [GROWTH_PLAN]: {
+      trialDays: 14,
+      lineItems: [
+        { amount: 29, currencyCode: "USD", interval: BillingInterval.Every30Days },
+      ],
+    },
+    [PRO_PLAN]: {
+      trialDays: 14,
+      lineItems: [
+        { amount: 79, currencyCode: "USD", interval: BillingInterval.Every30Days },
+      ],
+    },
+  },
+  hooks: {
+    afterAuth: async ({ session }) => {
+      await ensureShopSetup(session.shop);
+    },
+  },
   future: {
     expiringOfflineAccessTokens: true,
   },
@@ -32,3 +60,4 @@ export const unauthenticated = shopify.unauthenticated;
 export const login = shopify.login;
 export const registerWebhooks = shopify.registerWebhooks;
 export const sessionStorage = shopify.sessionStorage;
+export { STARTER_PLAN, GROWTH_PLAN, PRO_PLAN };
