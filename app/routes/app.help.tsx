@@ -60,11 +60,9 @@ export default function HelpPage() {
 
       <s-section heading="Need help?">
         <s-paragraph>
-          Email <s-link href="mailto:hello@solutionsarchilabs.com">hello@solutionsarchilabs.com</s-link>{" "}
-          or open an issue on{" "}
-          <s-link href="https://github.com/solutionsarchilabs/Archi-SMS-Order" target="_blank">
-            GitHub
-          </s-link>
+          Open the <s-link href="/app/assistant">AI assistant</s-link> and say what you want
+          (“set up MSG91”, “why didn’t order #1001 text”, “send a test”). Or email{" "}
+          <s-link href="mailto:hello@solutionsarchilabs.com">hello@solutionsarchilabs.com</s-link>
           .
         </s-paragraph>
       </s-section>

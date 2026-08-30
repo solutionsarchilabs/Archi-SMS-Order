@@ -36,6 +36,8 @@ export default function App() {
     <AppProvider embedded apiKey={apiKey}>
       <s-app-nav>
         <s-link href="/app">Home</s-link>
+        <s-link href="/app/assistant">AI assistant</s-link>
+        <s-link href="/app/test">Test</s-link>
         <s-link href="/app/templates">Templates</s-link>
         <s-link href="/app/logs">Logs</s-link>
         <s-link href="/app/settings">Settings</s-link>

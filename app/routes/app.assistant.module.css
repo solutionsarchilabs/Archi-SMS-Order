@@ -1,0 +1,31 @@
+.thread {
+  display: grid;
+  gap: 0.75rem;
+  max-height: 28rem;
+  overflow: auto;
+  padding: 0.5rem 0 1rem;
+}
+
+.user,
+.assistant {
+  display: flex;
+}
+
+.user {
+  justify-content: flex-end;
+}
+
+.bubble {
+  max-width: 42rem;
+  white-space: pre-wrap;
+  line-height: 1.45;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: #f1f1f1;
+  color: #202223;
+}
+
+.user .bubble {
+  background: #2c6ecb;
+  color: #fff;
+}

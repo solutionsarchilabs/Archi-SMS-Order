@@ -53,10 +53,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const providerReady = settings ? isProviderReady(settings, credentials) : false;
 
   const steps = [
-    { id: "provider", label: "Connect Twilio, MSG91, or a custom HTTP gateway", done: providerReady, href: "/app/settings" },
-    { id: "enable", label: "Turn on order SMS", done: Boolean(settings?.enabled), href: "/app/settings" },
+    { id: "provider", label: "Connect Twilio, MSG91, or a custom HTTP gateway", done: providerReady, href: "/app/assistant" },
+    { id: "enable", label: "Turn on order SMS", done: Boolean(settings?.enabled), href: "/app/assistant" },
     { id: "templates", label: "Review confirmation, COD, and shipping templates", done: true, href: "/app/templates" },
-    { id: "test", label: "Send a test SMS to your phone", done: Boolean(settings?.testSent), href: "/app/settings" },
+    { id: "test", label: "Send a test SMS to your phone", done: Boolean(settings?.testSent), href: "/app/test" },
   ];
 
   return {
@@ -89,17 +89,17 @@ export default function Index() {
 
   return (
     <s-page heading="Archi SMS Order">
-      <s-link slot="primary-action" href="/app/settings">
-        {data.providerReady ? "Settings" : "Connect provider"}
+      <s-link slot="primary-action" href="/app/assistant">
+        Talk to AI
       </s-link>
-      <s-link slot="secondary-actions" href="/app/templates">
-        Edit templates
+      <s-link slot="secondary-actions" href="/app/test">
+        Test if it works
       </s-link>
 
       {incomplete > 0 ? (
         <s-banner heading="Finish setup to start reducing WISMO tickets" tone="info">
-          Stores that text order updates get fewer “where is my order?” chats and recover more COD
-          orders. {incomplete} setup {incomplete === 1 ? "step" : "steps"} left.
+          Ask the AI assistant “set up the app for me”, or complete the checklist below.{" "}
+          {incomplete} setup {incomplete === 1 ? "step" : "steps"} left.
         </s-banner>
       ) : null}
 
