@@ -2,7 +2,7 @@
 
 client_id = "5047398d89fa885935f7afef169d2d8c"
 name = "Archi SMS Order"
-application_url = "https://example.com"
+application_url = "https://archi-sms-order.vercel.app"
 embedded = true
 
 [webhooks]
@@ -64,7 +64,7 @@ use_legacy_install_flow = false
 
 [auth]
 redirect_urls = [
-  "https://example.com/auth/callback",
-  "https://example.com/auth/shopify/callback",
-  "https://example.com/api/auth/callback"
+  "https://archi-sms-order.vercel.app/auth/callback",
+  "https://archi-sms-order.vercel.app/auth/shopify/callback",
+  "https://archi-sms-order.vercel.app/api/auth/callback"
 ]
