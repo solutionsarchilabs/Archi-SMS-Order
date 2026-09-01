@@ -4,7 +4,7 @@ import type {
   HeadersFunction,
   LoaderFunctionArgs,
 } from "react-router";
-import { Form, useActionData, useLoaderData } from "react-router";
+import { Form, useActionData, useLoaderData, useNavigation } from "react-router";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
 import { boundary } from "@shopify/shopify-app-react-router/server";
@@ -62,7 +62,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export default function BillingPage() {
   const data = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
+  const navigation = useNavigation();
   const shopify = useAppBridge();
+  const choosing = navigation.state === "submitting";
 
   useEffect(() => {
     if (actionData && "error" in actionData && actionData.error) {
@@ -99,7 +101,11 @@ export default function BillingPage() {
                 ) : plan.shopifyPlan ? (
                   <Form method="post">
                     <input type="hidden" name="plan" value={plan.shopifyPlan} />
-                    <s-button type="submit" variant={plan.id === "growth" ? "primary" : "secondary"}>
+                    <s-button
+                      type="submit"
+                      variant={plan.id === "growth" ? "primary" : "secondary"}
+                      {...(choosing ? { loading: true } : {})}
+                    >
                       Choose {plan.name}
                     </s-button>
                   </Form>

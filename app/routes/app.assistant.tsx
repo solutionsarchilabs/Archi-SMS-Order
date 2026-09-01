@@ -141,7 +141,16 @@ export default function AssistantPage() {
               <div className={styles.bubble}>{item.content}</div>
             </div>
           ))}
-          {sending ? <div className={styles.assistant}><div className={styles.bubble}>Working…</div></div> : null}
+          {sending ? (
+            <div className={styles.assistant}>
+              <div className={styles.bubble}>
+                <s-stack direction="inline" gap="small" alignItems="center">
+                  <s-spinner accessibilityLabel="Working" size="base"></s-spinner>
+                  <s-text>Working…</s-text>
+                </s-stack>
+              </div>
+            </div>
+          ) : null}
           <div ref={bottomRef} />
         </div>
 
@@ -162,7 +171,12 @@ export default function AssistantPage() {
                 setInput(event.currentTarget.value);
               }}
             />
-            <s-button type="submit" variant="primary" disabled={sending || undefined}>
+            <s-button
+              type="submit"
+              variant="primary"
+              disabled={sending || undefined}
+              {...(sending ? { loading: true } : {})}
+            >
               Send
             </s-button>
           </s-stack>

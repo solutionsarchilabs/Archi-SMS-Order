@@ -113,7 +113,11 @@ export default function TemplatesPage() {
               </s-paragraph>
             </s-section>
           ))}
-            <s-button type="submit" variant="primary">
+            <s-button
+              type="submit"
+              variant="primary"
+              {...(navigation.state === "submitting" ? { loading: true } : {})}
+            >
               Save templates
             </s-button>
         </s-stack>
