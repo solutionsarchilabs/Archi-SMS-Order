@@ -53,8 +53,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const providerReady = settings ? isProviderReady(settings, credentials) : false;
 
   const steps = [
-    { id: "provider", label: "Connect Twilio, MSG91, or a custom HTTP gateway", done: providerReady, href: "/app/assistant" },
-    { id: "enable", label: "Turn on order SMS", done: Boolean(settings?.enabled), href: "/app/assistant" },
+    { id: "provider", label: "Connect Twilio, MSG91, or a custom HTTP gateway", done: providerReady, href: "/app/settings" },
+    { id: "enable", label: "Turn on order SMS", done: Boolean(settings?.enabled), href: "/app/settings" },
     { id: "templates", label: "Review confirmation, COD, and shipping templates", done: true, href: "/app/templates" },
     { id: "test", label: "Send a test SMS to your phone", done: Boolean(settings?.testSent), href: "/app/test" },
   ];
@@ -105,7 +105,8 @@ export default function Index() {
 
       {!data.enabled && data.providerReady ? (
         <s-banner heading="SMS is connected but paused" tone="warning">
-          Turn on sending in Settings so new orders notify customers automatically.
+          Turn on sending in <s-link href="/app/settings">Settings</s-link> so new orders notify
+          customers automatically.
         </s-banner>
       ) : null}
 
@@ -195,7 +196,8 @@ export default function Index() {
       <s-section heading="Latest SMS">
         {data.logs.length === 0 ? (
           <s-paragraph>
-            No messages yet. Finish setup, then create an order — or send a test from Settings.
+            No messages yet. Finish setup, then create an order — or send a test from{" "}
+            <s-link href="/app/test">Test</s-link>.
           </s-paragraph>
         ) : (
           <s-table>
