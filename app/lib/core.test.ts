@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { encrypt, decrypt, maskSecret } from "../lib/crypto.server";
 import { isCodOrder, orderPhone } from "../lib/order.server";
 import { normalizePhone, toProviderNumber } from "../lib/phone.server";
-import { renderTemplate } from "../lib/templates.server";
+import { renderTemplate } from "../lib/templates";
 
 describe("normalizePhone", () => {
   it("adds +91 for 10-digit Indian numbers", () => {

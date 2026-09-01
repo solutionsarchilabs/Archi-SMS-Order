@@ -17,7 +17,7 @@ import {
   serializeCredentials,
 } from "../lib/shop.server";
 import { sendShopSms } from "../lib/sms.server";
-import { SAMPLE_VARS } from "../lib/templates.server";
+import { SAMPLE_VARS } from "../lib/templates";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { session } = await authenticate.admin(request);

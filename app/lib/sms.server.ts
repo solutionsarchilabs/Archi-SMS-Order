@@ -4,7 +4,7 @@ import type { EventType } from "./constants";
 import { normalizePhone } from "./phone.server";
 import { sendViaProvider } from "./providers.server";
 import { inQuietHours, isProviderReady, parseCredentials } from "./shop.server";
-import { renderTemplate, type TemplateVars } from "./templates.server";
+import { renderTemplate, type TemplateVars } from "./templates";
 
 type SendArgs = {
   shop: string;

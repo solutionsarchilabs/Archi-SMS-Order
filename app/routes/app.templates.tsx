@@ -16,7 +16,7 @@ import {
   TEMPLATE_VARS,
   type EventType,
 } from "../lib/constants";
-import { SAMPLE_VARS, renderTemplate } from "../lib/templates.server";
+import { SAMPLE_VARS, renderTemplate } from "../lib/templates";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { session } = await authenticate.admin(request);

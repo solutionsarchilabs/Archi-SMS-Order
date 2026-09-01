@@ -10,7 +10,7 @@ import { authenticate } from "../shopify.server";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { runHealthCheck } from "../lib/health.server";
 import { sendShopSms } from "../lib/sms.server";
-import { SAMPLE_VARS } from "../lib/templates.server";
+import { SAMPLE_VARS } from "../lib/templates";
 import db from "../db.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

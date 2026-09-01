@@ -1,5 +1,5 @@
 import type { EventType } from "./constants";
-import type { TemplateVars } from "./templates.server";
+import type { TemplateVars } from "./templates";
 
 export type OrderLike = {
   id?: number | string;

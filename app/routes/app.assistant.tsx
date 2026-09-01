@@ -11,10 +11,14 @@ import {
   isAiConfigured,
   runAssistant,
   welcomeMessage,
-  type ChatMessage,
 } from "../lib/assistant.server";
 import { runHealthCheck } from "../lib/health.server";
-import styles from "./app.assistant.module.css";
+import styles from "../styles/assistant.module.css";
+
+type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+};
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { session } = await authenticate.admin(request);

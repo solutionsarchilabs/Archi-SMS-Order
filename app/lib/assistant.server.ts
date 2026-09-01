@@ -4,7 +4,7 @@ import { maskSecret } from "./crypto.server";
 import { runHealthCheck } from "./health.server";
 import { parseCredentials, saveShopSettings, type SettingsPatch } from "./shop.server";
 import { sendShopSms } from "./sms.server";
-import { isEventType, SAMPLE_VARS } from "./templates.server";
+import { isEventType, SAMPLE_VARS } from "./templates";
 
 export type ChatRole = "user" | "assistant";
 
